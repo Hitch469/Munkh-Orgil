@@ -37,12 +37,6 @@ Designed as a front-end web development project, AETHERSTREAM demonstrates respo
 
 Example:
 
-```
-images/home.png
-images/action.png
-images/fantasy.png
-```
-
 ---
 
 ## 📁 Project Structure
