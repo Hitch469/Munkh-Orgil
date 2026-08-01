@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fantasy & Magic — AETHERSTREAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Dots&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body[data-theme="fantasy-magic"]{
+  --blue:#4fd8ff; --purple:#7a5cff; --pink:#b46bff;
+  --accent:#4fd8ff; --accent-2:#7a5cff; --accent-3:#b46bff;
+}
+
+.cat-hero{overflow:hidden;}
+.island{position:absolute;border-radius:50%;filter:blur(0.5px);
+  background:radial-gradient(circle at 35% 30%, rgba(180,107,255,0.55), rgba(79,216,255,0.15) 60%, transparent 75%);
+  animation:islandFloat 8s ease-in-out infinite;}
+.sparkle{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;
+  box-shadow:0 0 8px 2px var(--purple);animation:sparkleTwinkle 2.4s ease-in-out infinite;}
+@keyframes islandFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-22px);}}
+@keyframes sparkleTwinkle{0%,100%{opacity:0.15;transform:scale(0.6);}50%{opacity:1;transform:scale(1.3);}}
+
+</style>
+</head>
+<body data-theme="fantasy-magic">
+
+<div id="loader">
+  <div class="loader-mark">AETHERSTREAM</div>
+  <div class="loader-bar"></div>
+  <div class="loader-tag">Charging the sigils…</div>
+</div>
+<div id="veil"></div>
+<canvas id="fx-canvas"></canvas>
+<div id="cursor-glow"></div>
+<div class="bg-grain"></div>
+
+
+<header class="nav">
+  <a href="index.html" class="logo" data-transition><span class="dot"></span>AETHERSTREAM</a>
+  <nav class="nav-links">
+    <a href="index.html" data-transition>Home</a>
+    <a href="action-adventure.html" data-transition class="">Action</a>
+    <a href="fantasy-magic.html" data-transition class="active">Fantasy</a>
+    <a href="romance-slice-of-life.html" data-transition class="">Romance</a>
+    <a href="scifi-cyberpunk.html" data-transition class="">Sci-Fi</a>
+    <a href="horror-mystery.html" data-transition class="">Horror</a>
+  </nav>
+  <div class="nav-right">
+    <div class="search-wrap">
+      <div class="search-box glass">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" placeholder="Search titles, genres…">
+      </div>
+      <div class="suggestions glass"></div>
+    </div>
+    <button class="icon-btn" aria-label="Notifications">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
+    </button>
+    <button id="login-trigger" class="btn-ghost">Sign in</button>
+    <button id="profile-trigger" class="avatar-btn hidden-el" style="display:none">H</button>
+  </div>
+</header>
+
+
+<main>
+  <section class="cat-hero">
+    <div class="ember-field" id="fantasy-field"></div>
+    <div class="cat-hero-inner">
+      <span class="hero-eyebrow">02 · Other realms</span>
+      <h1 class="hero-title">Fantasy &amp; Magic</h1>
+      <p class="cat-hero-desc">Floating islands, forbidden spells, and heroes who were never supposed to survive chapter one. Step through the gate.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <button class="btn-primary" onclick="showToast('Shuffling the fantasy-magic shelf')">▶ Shuffle &amp; play</button>
+        <a href="index.html" data-transition class="btn-ghost">Back to home</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:2rem">
+    <div class="filter-bar">
+      <button class="filter-chip active" data-filter="all">All</button>
+      <button class="filter-chip" data-filter="new">New episodes</button>
+      <button class="filter-chip" data-filter="top">Top rated</button>
+      <button class="filter-chip" data-filter="dub">Dubbed</button>
+      <button class="filter-chip" data-filter="sub">Subbed</button>
+    </div>
+    <div class="grid-cards card-perspective" id="cat-grid" data-infinite></div>
+    <div class="load-more-wrap"><span class="sentinel mono" style="color:var(--ink-faint);font-size:0.7rem;">Loading more…</span></div>
+  </section>
+</main>
+
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="logo" data-transition><span class="dot"></span>AETHERSTREAM</a>
+      <p>A streaming grid for every kind of anime fan — built for late nights, long binges, and everything after the credits roll.</p>
+      <div class="social-row">
+        <a class="icon-btn" href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 3H22l-7.6 8.7L23 21h-6.9l-5.4-6.6L4.4 21H1.3l8.1-9.3L1 3h7l4.9 6zM17.6 19h1.7L7.5 5H5.7z"/></svg></a>
+        <a class="icon-btn" href="#" aria-label="Discord"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 6.5c-1.4-.7-2.9-1.1-4.4-1.4l-.2.4c1.3.3 2.5.8 3.6 1.5-2.9-1.4-6.3-1.4-9.2 0 1.1-.7 2.3-1.2 3.6-1.5l-.2-.4C11.9 5.4 10.4 5.8 9 6.5 6.5 10 5.8 13.4 6.1 16.7c1.5 1.1 3 1.8 4.5 2.2l.6-1c-.8-.3-1.6-.7-2.3-1.2l.4-.3c2.9 1.3 6.2 1.3 9 0l.4.3c-.7.5-1.5.9-2.3 1.2l.6 1c1.5-.4 3-1.1 4.5-2.2.4-4-.7-7.3-2.5-10.2zM10.5 14.7c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5zm5 0c-.7 0-1.3-.7-1.3-1.5s.6-1.5 1.3-1.5 1.3.7 1.3 1.5-.6 1.5-1.3 1.5z"/></svg></a>
+        <a class="icon-btn" href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Browse</h4>
+      <ul>
+        <li><a href="action-adventure.html" data-transition>Action &amp; Adventure</a></li>
+        <li><a href="fantasy-magic.html" data-transition>Fantasy &amp; Magic</a></li>
+        <li><a href="romance-slice-of-life.html" data-transition>Romance &amp; Slice of Life</a></li>
+        <li><a href="scifi-cyberpunk.html" data-transition>Sci-Fi &amp; Cyberpunk</a></li>
+        <li><a href="horror-mystery.html" data-transition>Horror &amp; Mystery</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Account</h4>
+      <ul>
+        <li><a href="#" id="footer-login">Sign in</a></li>
+        <li><a href="#">Watchlist</a></li>
+        <li><a href="#">Help centre</a></li>
+        <li><a href="#">Devices</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Stay in the loop</h4>
+      <p style="color:var(--ink-dim);font-size:0.85rem;">New episodes, seasonal drops, no spam.</p>
+      <form class="newsletter-form">
+        <input type="email" required placeholder="you@email.com">
+        <button class="btn-primary" type="submit">Join</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 AETHERSTREAM — concept showcase, not a real service</span>
+    <span>Built for the ones who still believe in gates</span>
+  </div>
+</footer>
+
+
+<div class="modal-backdrop" id="login-modal">
+  <div class="modal glass">
+    <button class="icon-btn modal-close">✕</button>
+    <h3>Welcome back</h3>
+    <p class="sub">Sign in to sync your watchlist across devices.</p>
+    <form>
+      <div class="field"><label>Email</label><input type="email" required placeholder="you@email.com"></div>
+      <div class="field"><label>Password</label><input type="password" required placeholder="••••••••"></div>
+      <button class="btn-primary" style="width:100%" type="submit">Sign in</button>
+    </form>
+    <p class="modal-footnote">New here? <a href="#">Create an account</a></p>
+  </div>
+</div>
+
+<div class="drawer-backdrop" id="profile-drawer">
+  <div class="drawer glass">
+    <button class="icon-btn modal-close" style="position:absolute;top:1.2rem;right:1.2rem;">✕</button>
+    <div class="drawer-head">
+      <div class="avatar-btn">H</div>
+      <div><h3>Hunter</h3><p>Level 12 · Joined 2024</p></div>
+    </div>
+    <div class="drawer-tabs">
+      <button class="drawer-tab active" data-tab="watchlist">Watchlist</button>
+      <button class="drawer-tab" data-tab="continue">Continue</button>
+      <button class="drawer-tab" data-tab="recs">For you</button>
+    </div>
+    <div class="drawer-list" id="drawer-list"></div>
+  </div>
+</div>
+
+
+<script src="base.js"></script>
+<script>
+
+  function renderCard(a){
+    return `<div class="anime-card glass" style="--c1:${a.c[0]};--c2:${a.c[1]};--c3:${a.c[2]}">
+      <div class="poster">
+        <div class="poster-glow"></div><div class="poster-noise"></div>
+        <span class="poster-badge mono">${a.badge}</span>
+        <span class="poster-rating mono"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>${a.rating}</span>
+        <button class="fav-btn" data-id="${a.id}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></button>
+        <span class="poster-title">${a.title}</span>
+      </div>
+      <div class="card-meta"><div class="t">${a.title}</div><div class="m">${a.genre.toUpperCase()} · ${a.eps} EPS</div></div>
+    </div>`;
+  }
+  window.renderCard = renderCard;
+  window.AETHER_POOL = window.AETHER_DATA.filter(a => a.genre === 'fantasy');
+  const pool = window.AETHER_POOL.length ? window.AETHER_POOL : window.AETHER_DATA;
+  document.getElementById('cat-grid').innerHTML = pool.concat(pool).slice(0,10).map(renderCard).join('');
+
+  document.getElementById('footer-login')?.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('login-trigger')?.click();
+  });
+
+      const ff = document.getElementById('fantasy-field');
+      ff.style.position='absolute'; ff.style.inset='0'; ff.style.zIndex='1'; ff.style.overflow='hidden';
+      const islands=[[8,20,120],[75,12,90],[85,55,60],[15,60,70],[45,8,50]];
+      islands.forEach((p,i)=>{
+        const d=document.createElement('div');
+        d.className='island';
+        d.style.left=p[0]+'%'; d.style.top=p[1]+'%'; d.style.width=p[2]+'px'; d.style.height=(p[2]*0.4)+'px';
+        d.style.animationDelay=(i*0.7)+'s';
+        ff.appendChild(d);
+      });
+      for(let i=0;i<40;i++){
+        const s=document.createElement('div');
+        s.className='sparkle';
+        s.style.left=Math.random()*100+'%'; s.style.top=Math.random()*100+'%';
+        s.style.animationDelay=(Math.random()*3)+'s';
+        ff.appendChild(s);
+      }
+
+</script>
+</body>
+</html>
