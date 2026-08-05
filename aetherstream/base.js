@@ -1,10 +1,7 @@
-/* ============================================================
-   AETHERSTREAM — shared interactions
-   All state kept in memory (no localStorage — this is a demo).
-   ============================================================ */
+
 (function(){
 
-  /* ---------- Mock catalogue ---------- */
+
   const CATALOGUE = [
     {id:1,title:"Neon Ronin",genre:"scifi",rating:9.2,eps:24,badge:"NEW EP",c:["#00e5ff","#7a5cff","#ff4fd8"]},
     {id:2,title:"Ashfall Chronicles",genre:"action",rating:8.8,eps:12,badge:"SUB",c:["#ff5a36","#ff9a3d","#ffce54"]},
@@ -38,7 +35,6 @@
   };
   window.AETHER_STATE = state;
 
-  /* ---------- Loading screen ---------- */
   window.addEventListener('load', () => {
     const loader = document.getElementById('loader');
     if(loader){
@@ -46,7 +42,6 @@
     }
   });
 
-  /* ---------- Page-load veil in (fade content up) ---------- */
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[data-transition]').forEach(link => {
       link.addEventListener('click', function(e){
@@ -60,7 +55,6 @@
     });
   });
 
-  /* ---------- Nav scroll state ---------- */
   const nav = document.querySelector('header.nav');
   if(nav){
     window.addEventListener('scroll', () => {
@@ -68,7 +62,6 @@
     }, {passive:true});
   }
 
-  /* ---------- Cursor glow ---------- */
   const glow = document.getElementById('cursor-glow');
   if(glow){
     window.addEventListener('mousemove', e => {
@@ -76,7 +69,6 @@
     });
   }
 
-  /* ---------- 3D tilt on cards ---------- */
   function attachTilt(el){
     el.addEventListener('mousemove', e => {
       const r = el.getBoundingClientRect();
@@ -90,7 +82,6 @@
   }
   document.querySelectorAll('.anime-card, .cat-tile').forEach(attachTilt);
 
-  /* ---------- Carousel controls ---------- */
   document.querySelectorAll('.carousel-wrap').forEach(wrap => {
     const track = wrap.querySelector('.carousel');
     const prev = wrap.querySelector('.prev');
@@ -100,7 +91,6 @@
     if(next) next.addEventListener('click', () => track.scrollBy({left:scrollAmt(), behavior:'smooth'}));
   });
 
-  /* ---------- Favorite / watchlist toggle ---------- */
   document.addEventListener('click', e => {
     const btn = e.target.closest('.fav-btn');
     if(!btn) return;
@@ -111,7 +101,6 @@
     showToast(btn.classList.contains('active') ? 'Added to your watchlist' : 'Removed from your watchlist');
   });
 
-  /* ---------- Toast ---------- */
   let toastTimer;
   window.showToast = function(msg){
     let toast = document.getElementById('toast');
@@ -127,7 +116,6 @@
     toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
   };
 
-  /* ---------- Search live suggestions ---------- */
   const searchInput = document.querySelector('.search-box input');
   const suggestBox = document.querySelector('.suggestions');
   if(searchInput && suggestBox){
@@ -166,7 +154,6 @@
     return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
 
-  /* ---------- Banner autoplay ---------- */
   const bannerSlides = document.querySelectorAll('.banner-slide');
   const bannerDots = document.querySelectorAll('.banner-dots button');
   if(bannerSlides.length){
@@ -180,7 +167,6 @@
     setInterval(() => showBanner((bi+1) % bannerSlides.length), 5000);
   }
 
-  /* ---------- Login modal ---------- */
   const loginBtn = document.getElementById('login-trigger');
   const loginModal = document.getElementById('login-modal');
   if(loginBtn && loginModal){
@@ -197,7 +183,6 @@
     });
   }
 
-  /* ---------- Profile drawer ---------- */
   const profileBtn = document.getElementById('profile-trigger');
   const drawer = document.getElementById('profile-drawer');
   if(profileBtn && drawer){
@@ -239,14 +224,12 @@
     </div>`;
   }
 
-  /* ---------- Newsletter ---------- */
   document.querySelector('.newsletter-form')?.addEventListener('submit', e => {
     e.preventDefault();
     showToast('You\'re on the list.');
     e.target.reset();
   });
 
-  /* ---------- Filter chips (category pages) ---------- */
   document.querySelectorAll('.filter-chip').forEach(chip => {
     chip.addEventListener('click', () => {
       chip.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
@@ -255,7 +238,6 @@
     });
   });
 
-  /* ---------- Infinite scroll (mock) ---------- */
   const sentinel = document.querySelector('.sentinel');
   const grid = document.querySelector('.grid-cards[data-infinite]');
   if(sentinel && grid && window.renderCard){
@@ -273,7 +255,6 @@
     io.observe(sentinel);
   }
 
-  /* ---------- Background particle field (canvas 2D) ---------- */
   const canvas = document.getElementById('fx-canvas');
   if(canvas){
     const ctx = canvas.getContext('2d');
@@ -320,7 +301,6 @@
     window.addEventListener('resize', () => { resize(); initParticles(); });
   }
 
-  /* ---------- Hero parallax ---------- */
   const stage = document.querySelector('.hero-stage');
   if(stage){
     window.addEventListener('mousemove', e => {
@@ -330,7 +310,6 @@
     });
   }
 
-  /* ---------- Parallax scroll on hero content ---------- */
   const heroEl = document.querySelector('.hero');
   if(heroEl){
     window.addEventListener('scroll', () => {
