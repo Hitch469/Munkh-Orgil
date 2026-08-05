@@ -1,8 +1,4 @@
-/* ============================================================
-   AETHERSTREAM — base design system
-   Fonts: Zen Dots (hero display), Rajdhani (headings),
-          Inter (body), JetBrains Mono (data/utility)
-   ============================================================ */
+
 :root{
   --bg:#05060a;
   --bg-2:#0b0d16;
@@ -56,7 +52,6 @@ h1,h2,h3,h4{
 
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
 
-/* ---------------- Background FX layer ---------------- */
 #fx-canvas{
   position:fixed;
   inset:0;
@@ -81,7 +76,7 @@ h1,h2,h3,h4{
   mix-blend-mode:overlay;
 }
 
-/* ---------------- Loading screen ---------------- */
+
 #loader{
   position:fixed;inset:0;z-index:999;
   background:var(--bg);
@@ -112,7 +107,7 @@ h1,h2,h3,h4{
 }
 .loader-tag{font-size:0.68rem;letter-spacing:0.2em;color:var(--ink-faint);text-transform:uppercase;}
 
-/* ---------------- Page transition veil ---------------- */
+
 #veil{
   position:fixed;inset:0;z-index:998;
   background:var(--bg);
@@ -129,7 +124,7 @@ h1,h2,h3,h4{
   100%{transform:translateY(0%);opacity:0;visibility:hidden;}
 }
 
-/* ---------------- Glass utility ---------------- */
+
 .glass{
   background:var(--glass);
   backdrop-filter:blur(20px) saturate(140%);
@@ -137,7 +132,7 @@ h1,h2,h3,h4{
   border:1px solid var(--glass-border);
 }
 
-/* ---------------- Nav ---------------- */
+
 header.nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
@@ -268,7 +263,7 @@ header.nav.scrolled{
 }
 .btn-ghost:hover{border-color:color-mix(in srgb, var(--accent) 60%, var(--glass-border));}
 
-/* ---------------- Sections ---------------- */
+
 main{position:relative;z-index:2;}
 .section{padding:5.5rem 3vw;}
 .section-head{
@@ -289,7 +284,6 @@ main{position:relative;z-index:2;}
 }
 .section-link:hover{color:var(--accent);gap:0.55rem;}
 
-/* ---------------- Carousel ---------------- */
 .carousel-wrap{position:relative;}
 .carousel{
   display:flex;gap:1.1rem;overflow-x:auto;scroll-snap-type:x proximity;
@@ -310,7 +304,7 @@ main{position:relative;z-index:2;}
 .carousel-btn.next{right:-6px;}
 .carousel-btn svg{width:16px;height:16px;}
 
-/* ---------------- Cards ---------------- */
+
 .card-perspective{perspective:900px;}
 .anime-card{
   scroll-snap-align:start;
@@ -391,7 +385,7 @@ main{position:relative;z-index:2;}
 .card-meta .t{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.92rem;margin-bottom:0.15rem;}
 .card-meta .m{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--ink-faint);}
 
-/* ---------------- Categories grid ---------------- */
+
 .cat-grid{
   display:grid;grid-template-columns:repeat(5,1fr);gap:1.1rem;
 }
@@ -409,7 +403,7 @@ main{position:relative;z-index:2;}
 .cat-tile span.name{position:relative;z-index:2;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;line-height:1.2;}
 .cat-tile span.tag{position:relative;z-index:2;display:block;font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.75);letter-spacing:0.12em;margin-bottom:0.3rem;}
 
-/* ---------------- Hero ---------------- */
+
 .hero{
   min-height:100vh;
   display:flex;align-items:center;
@@ -480,7 +474,7 @@ main{position:relative;z-index:2;}
 .hero-scroll .line{width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:scrollLine 2s ease-in-out infinite;}
 @keyframes scrollLine{0%,100%{opacity:0.2;}50%{opacity:1;}}
 
-/* ---------------- Banner ---------------- */
+
 .banner{
   position:relative;border-radius:20px;overflow:hidden;
   height:min(420px,52vw);
@@ -501,7 +495,7 @@ main{position:relative;z-index:2;}
 .banner-dots button{width:22px;height:3px;border-radius:2px;border:none;background:rgba(255,255,255,0.3);cursor:pointer;transition:background 0.3s ease;}
 .banner-dots button.active{background:#fff;}
 
-/* ---------------- Footer ---------------- */
+
 footer.site-footer{
   padding:4rem 3vw 2rem;
   border-top:1px solid var(--glass-border);
@@ -537,7 +531,7 @@ footer.site-footer{
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* ---------------- Modal ---------------- */
+
 .modal-backdrop{
   position:fixed;inset:0;z-index:400;
   background:rgba(3,4,7,0.7);backdrop-filter:blur(6px);
@@ -564,7 +558,7 @@ footer.site-footer{
 .modal-footnote{text-align:center;font-size:0.8rem;color:var(--ink-faint);margin-top:1.2rem;}
 .modal-footnote a{color:var(--accent);}
 
-/* Profile drawer */
+
 .drawer-backdrop{
   position:fixed;inset:0;z-index:400;background:rgba(3,4,7,0.6);
   opacity:0;visibility:hidden;transition:opacity 0.3s ease;
@@ -599,7 +593,7 @@ footer.site-footer{
 .drawer-info .m{font-size:0.68rem;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;}
 .drawer-empty{color:var(--ink-faint);font-size:0.85rem;text-align:center;padding:2rem 0;}
 
-/* ---------------- Filter bar (category pages) ---------------- */
+
 .filter-bar{display:flex;flex-wrap:wrap;gap:0.7rem;margin-bottom:2.4rem;}
 .filter-chip{
   padding:0.5rem 1.05rem;border-radius:100px;
@@ -616,7 +610,7 @@ footer.site-footer{
 .load-more-wrap{display:flex;justify-content:center;margin-top:3rem;}
 .sentinel{height:1px;}
 
-/* Category hero specific */
+
 .cat-hero{
   min-height:60vh;display:flex;align-items:center;
   padding:9rem 3vw 4rem;position:relative;overflow:hidden;
@@ -626,7 +620,7 @@ footer.site-footer{
 .cat-hero .hero-title{font-size:clamp(2.2rem,6vw,4rem);}
 .cat-hero-desc{color:var(--ink-dim);max-width:56ch;margin:0 auto 2rem;line-height:1.7;}
 
-/* ---------------- Responsive ---------------- */
+
 @media (max-width:1080px){
   .hero-grid{grid-template-columns:1fr;}
   .hero-stage{order:-1;height:340px;}
